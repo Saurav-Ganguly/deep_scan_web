@@ -67,15 +67,20 @@ class ProductListPage extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12)),
                           child: ExpansionTile(
+                            backgroundColor: _getColorForHarmfulness(
+                                    product.harmfulnessPercentage)
+                                .withOpacity(0.3),
                             title: Row(
                               children: [
                                 if (product.typeIcon != null)
                                   Text(
                                     product.typeIcon!,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                                      color: _getColorForHarmfulness(
+                                        product.harmfulnessPercentage,
+                                      ).withOpacity(1),
                                     ),
                                   ),
                                 const SizedBox(width: 12),
@@ -86,9 +91,13 @@ class ProductListPage extends StatelessWidget {
                                     children: [
                                       Text(
                                         product.name,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          color: _getColorForHarmfulness(
+                                            product.harmfulnessPercentage,
+                                          ),
+                                        ),
                                       ),
                                       const SizedBox(height: 4),
                                       Text(
@@ -285,9 +294,9 @@ class ProductListPage extends StatelessWidget {
   }
 
   Color _getColorForIngredient(int harmfulnessFactor) {
-    if (harmfulnessFactor <= 3) {
+    if (harmfulnessFactor <= 2) {
       return Colors.green.shade700;
-    } else if (harmfulnessFactor <= 6) {
+    } else if (harmfulnessFactor <= 4) {
       return Colors.orange.shade700;
     } else {
       return Colors.red.shade700;
@@ -295,9 +304,9 @@ class ProductListPage extends StatelessWidget {
   }
 
   Color _getColorForHarmfulness(int harmfulness) {
-    if (harmfulness >= 67) {
+    if (harmfulness >= 90) {
       return Colors.green;
-    } else if (harmfulness >= 34) {
+    } else if (harmfulness >= 70) {
       return Colors.orange;
     } else {
       return Colors.red;
