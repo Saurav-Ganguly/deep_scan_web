@@ -112,7 +112,7 @@ class ProductListPage extends StatelessWidget {
                               ],
                             ),
                             trailing: SizedBox(
-                              width: 180,
+                              width: 80,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
